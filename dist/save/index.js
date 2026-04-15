@@ -47,7 +47,7 @@ function run() {
                 const path = core.getState('path');
                 const target = `${cachePath}/${path.split('/').slice(-1)[0]}`;
                 // Skip if another concurrent job already saved this cache key
-                const check = yield (0, cache_1.exec)(`test -d ${target} && echo exists || echo missing`);
+                const check = yield (0, cache_1.exec)(`/bin/bash -c "test -d ${target} && echo exists || echo missing"`);
                 if (check.stdout.trim() === 'exists') {
                     core.info(`Cache already saved by another job for key ${key}, skipping`);
                     return;
